@@ -19,12 +19,16 @@
 #response = request['choices'][0]['message']['content']
 
 from langchain.llms import OpenAI
-from langchain.chat_models import ChatOpenAI
-
+from langchain import ChatOpenAI
+from langchain.prompts import PromptTemplate
 llm = OpenAI(openai_api_key="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")
+
+prompt = PromptTemplate.from_template("What is a good name for a company that makes {product}?")
+prompt.format(product="colorful socks")
+
+
 chat_model = ChatOpenAI()
 
 
 text = "what is a good name for my pet who is a dog?"
-
-print(chat_model.predict(text))
+chat_model.add_message(text)
