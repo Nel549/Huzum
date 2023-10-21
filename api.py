@@ -19,16 +19,18 @@
 #response = request['choices'][0]['message']['content']
 
 from langchain.llms import OpenAI
-from langchain import ChatOpenAI
-from langchain.prompts import PromptTemplate
-llm = OpenAI(openai_api_key="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")
+from langchain.chat_models import ChatOpenAI
 
-prompt = PromptTemplate.from_template("What is a good name for a company that makes {product}?")
-prompt.format(product="colorful socks")
+import os
+from dotenv import load_dotenv
+
+load_dotenv()  # Load environment variables from .env file
+
+api_key = os.getenv("OPENAI_API_KEY")  # Replace "API_KEY" with the name of your API key variable in .env file
+
+
 
 
 chat_model = ChatOpenAI()
 
 
-text = "what is a good name for my pet who is a dog?"
-chat_model.add_message(text)
