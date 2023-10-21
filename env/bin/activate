@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/petrisor/Documents/GitHub/Huzum/env"
+VIRTUAL_ENV="/Users/danielbrinza/Desktop/Huzum-1/env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
