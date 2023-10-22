@@ -18,37 +18,6 @@ import os
 
 from langchain.llms import OpenAI
 
-# secret_key = os.getenv("OPENAI_API_KEY")
-# llm = OpenAI(openai_api_key=secret_key)
-
-# reader = PdfReader('data_unstr/1.pdf')
-
-# raw_text = ''
-# for i, page in enumerate(reader.pages):
-#     text = page.extract_text()
-#     if text:
-#         raw_text += text
-
-
-# text_splitter = CharacterTextSplitter(        
-#     separator = "\n",
-#     chunk_size = 1000,
-#     chunk_overlap  = 200,
-#     length_function = len,
-# )
-# texts = text_splitter.split_text(raw_text)
-# embeddings = OpenAIEmbeddings()
-# docsearch = FAISS.from_texts(texts, embeddings)
-
-# from langchain.chains.question_answering import load_qa_chain
-
-# chain = load_qa_chain(OpenAI(), chain_type="stuff")
-
-# query = "Combien de temps dure la fdv ?"
-# docs = docsearch.similarity_search(query)
-# m = chain.run(input_documents=docs, question=query)
-# print(m)
-
 import fitz  # PyMuPDF
 pdf_document = fitz.open('data_unstr/1.pdf')
 text = ''
@@ -73,15 +42,14 @@ docsearch = FAISS.from_texts(texts, embeddings)
 from langchain.chains.question_answering import load_qa_chain
 
 chain = load_qa_chain(OpenAI(), chain_type="stuff")
-
-query = "Quelle est l’histoire de la FDV ?"
+input_main = input('Your question is : ')
+query = f"{input_main}"
 docs = docsearch.similarity_search(query)
 m = chain.run(input_documents=docs, question=query)
-print(m)
 
+if m in text:
+    print(m)
 
 agent = create_csv_agent(OpenAI(temperature = 0), ['data_unstr/TransUPD.csv', 'data_unstr/bathroom_location.csv'] , verbose = True )
 # agent = create_csv_agent(OpenAI(temperature = 0), 'data_unstr/bathroom_location.csv' , verbose = True )
-agent.run("Je veux l'emplacement de Gare (Nord)")
-
-
+m = agent.run(f"{input_main}")
