@@ -42,11 +42,16 @@ docsearch = FAISS.from_texts(texts, embeddings)
 from langchain.chains.question_answering import load_qa_chain
 
 chain = load_qa_chain(OpenAI(), chain_type="stuff")
-input_main = input('Your question is : ')
-query = f"{input_main}"
-docs = docsearch.similarity_search(query)
-m = chain.run(input_documents=docs, question=query)
-print(m)
+
+
+def run_api(msg):
+    query = f"{msg}"
+    docs = docsearch.similarity_search(query)
+    m = chain.run(input_documents=docs, question=query)
+
+    return m
+
+
 
 
 agent = create_csv_agent(OpenAI(temperature = 0), ['data_unstr/TransUPD.csv', 'data_unstr/bathroom_location.csv'] , verbose = True )

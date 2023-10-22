@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import main_form
 from .models import Message
 from django.http import HttpResponse
+from Agent import file
 
 # Create your views here.
 
@@ -26,11 +27,14 @@ def index(request):
         if form.is_valid():
             form.save()  
             last_msg = Message.objects.last()# create an instance of the form and call save() on it
+            output = file.run_api(msg)
             context = {
             'form': form,
             'msgs': msgs,
-            'last': msgs
-        }
+            'last': output
+            }
+            
+
 
         print(msgs[::-1][0])
 
