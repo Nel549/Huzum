@@ -39,29 +39,33 @@
               </div>
             </div>
           </div>
-          {% if msgs %}
-          {% for i in msgs %}
-          <div class="msg right-msg">
-            <div
-             class="msg-img"
-             style="background-image: url(https://image.flaticon.com/icons/svg/145/145867.svg)"
-            ></div>
-      
-            <div class="msg-bubble">
-              <div class="msg-info">
-                <div class="msg-info-name">You</div>
-                <div class="msg-info-time">12:46</div>
-              </div>
-      
-              <div class="msg-text">
-                
-                    {{i}}
-                
+
+          <div id="container_msg">
+
+            {% if msgs %}
+            {% for i in msgs %}
+            <div id="div_msg"class="msg right-msg">
+              <div
+               class="msg-img"
+               style="background-image: url(https://image.flaticon.com/icons/svg/145/145867.svg)"
+              ></div>
+        
+              <div class="msg-bubble">
+                <div class="msg-info">
+                  <div class="msg-info-name">You</div>
+                  <div class="msg-info-time">12:46</div>
+                </div>
+        
+                <div id="div_text"class="msg-text">
+                  
+                      {{i}}
+                  
+                </div>
               </div>
             </div>
+            {% endfor %}
+            {% endif %}
           </div>
-          {% endfor %}
-          {% endif %}
         </main>
       
         <form class="msger-inputarea" method="post" id="message-form">
@@ -70,25 +74,32 @@
           <button type="submit" class="msger-send-btn">Send</button>
         </form>
       </section>
+    
 
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
       <script type="text/javascript"> 
+        fetch('http://127.0.0.1:8000/api')
+        .then(res => console.log(res.json()))
+        
+        /*
         $(document).on('submit','#message-form',function(e){ 
             e.preventDefault(); 
             $.ajax({ 
                 type:'POST', 
                 url:'{% url "index" %}', 
-                data: 
+                dataType: 'text',
+                data:
                 { 
-                    task:$("#input_msg").val(), 
+                    input_msg:$("#input_msg").val(), 
                     csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val() 
                 }, 
-                error:function(data){ 
-                      alert('Saved' + data ); 
+                success:function(data){ 
+                  
                         } 
                 }) 
             }); 
+            */
         </script> 
    {% endblock %}
    

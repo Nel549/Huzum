@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import main_form
 from .models import Message
 
@@ -13,16 +13,13 @@ def index(request):
     }
     if request.method == 'POST':
         form = main_form(request.POST)
-        msg = request.POST.get('input_msg')
-        print(msg)
+        #msg = request.POST.get('input_msg')
 
         if form.is_valid():
-            save_msg = Message.objects.create(
-                msg = "Mesaj",
-                
-            )    
-            
-            save_msg.save()
+            main_form.save()
+            return redirect(' ')
+
+
 
     return render(request, 'base/index.html', context)
 
