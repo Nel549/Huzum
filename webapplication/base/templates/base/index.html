@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <script src="{% static 'javascript/main.js' %}"></script>
+    <title>ChatBot</title>
+</head>
+<body>
+    {% block content %} 
+    <section class="msger">
+        <header class="msger-header">
+          <div class="msger-header-title">
+            <i class="fas fa-comment-alt"></i> SimpleChat
+          </div>
+          <div class="msger-header-options">
+            <span><i class="fas fa-cog"></i></span>
+          </div>
+        </header>
+      
+        <main class="msger-chat">
+          <div class="msg left-msg">
+            <div
+             class="msg-img"
+             style="background-image: url(https://image.flaticon.com/icons/svg/327/327779.svg)"
+            ></div>
+      
+            <div class="msg-bubble">
+              <div class="msg-info">
+                <div class="msg-info-name">BOT</div>
+                <div class="msg-info-time">12:45</div>
+              </div>
+      
+              <div class="msg-text">
+                Hi, welcome to SimpleChat! Go ahead and send me a message. 😄
+              </div>
+            </div>
+          </div>
+          
+          {% if msgs %}
+
+          {% for i in msgs %}
+         
+          <div id="div_msg"class="msg right-msg">
+            <div
+              class="msg-img"
+              style="background-image: url(https://image.flaticon.com/icons/svg/145/145867.svg)"
+            ></div>
+      
+            <div class="msg-bubble">
+              <div class="msg-info">
+                <div class="msg-info-name">You</div>
+                <div class="msg-info-time">12:46</div>
+              </div>
+      
+              <div id="div_text"class="msg-text">
+                
+                    {{i}}
+                
+              </div>
+            </div>
+          </div>
+          
+          <div class="msg left-msg">
+            <div
+             class="msg-img"
+             style="background-image: url(https://image.flaticon.com/icons/svg/327/327779.svg)"
+            ></div>
+         
+            <div class="msg-bubble">
+              <div class="msg-info">
+                <div class="msg-info-name">BOT</div>
+                <div class="msg-info-time">12:45</div>
+              </div>
+      
+              <div class="msg-text">
+                {{i}}
+              </div>
+            </div>
+          </div>
+
+          {% endfor %}
+
+          {% endif %}
+        </main>
+      
+        <form class="msger-inputarea" method="post" id="message-form">
+            {% csrf_token %}
+            {{form}}
+          <button type="submit" class="msger-send-btn">Send</button>
+        </form>
+      </section>
+    
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+      <script type="text/javascript"> 
+        fetch('http://127.0.0.1:8000/api')
+        .then(res => console.log(res.json()))
+        
+        /*
+        $(document).on('submit','#message-form',function(e){ 
+            e.preventDefault(); 
+            $.ajax({ 
+                type:'POST', 
+                url:'{% url "index" %}', 
+                dataType: 'text',
+                data:
+                { 
+                    input_msg:$("#input_msg").val(), 
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val() 
+                }, 
+                success:function(data){ 
+                  
+                        } 
+                }) 
+            }); 
+            */
+        </script> 
+   {% endblock %}
+   
+</body>
+</html>

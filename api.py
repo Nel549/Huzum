@@ -19,5 +19,8 @@ pinecone.init(api_key=pinecone_api_key, environment=pinecone_enviroment_key)
 
 # Set the llm and chat models
 llm = OpenAI(openai_api_key=secret_key)
-chat_models = ChatOpenAI()
+chat_model = ChatOpenAI(openai_api_key=secret_key)
 
+respone = llm.predict("hi!")
+chat_model.predict("hi!")
+print(respone)

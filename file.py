@@ -12,8 +12,9 @@ from langchain.llms import OpenAI
 from dotenv import load_dotenv
 from langchain.document_loaders.csv_loader import CSVLoader
 from langchain.agents import create_csv_agent
-
-
+from langchain.vectorstores import  Pinecone
+from langchain.embeddings.openai import OpenAIEmbeddings
+import pinecone
 import os
 
 from langchain.llms import OpenAI
