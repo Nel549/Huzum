@@ -49,7 +49,11 @@ print(m)
 
 agent = create_csv_agent(OpenAI(temperature = 0), ['data_unstr/TransUPD.csv', 'data_unstr/bathroom_location.csv'] , verbose = True )
 # agent = create_csv_agent(OpenAI(temperature = 0), 'data_unstr/bathroom_location.csv' , verbose = True )
+<<<<<<< HEAD
 agent.run("Je veux l'emplacement de Gare (Nord)")
 
 
  
+=======
+m = agent.run(f"{input_main}")
+>>>>>>> 2264daf7573c519a1ac4cb2b77d10a0a1b764fa9
