@@ -47,6 +47,9 @@ docs = docsearch.similarity_search(query)
 m = chain.run(input_documents=docs, question=query)
 print(m)
 
+
 agent = create_csv_agent(OpenAI(temperature = 0), ['data_unstr/TransUPD.csv', 'data_unstr/bathroom_location.csv'] , verbose = True )
 # agent = create_csv_agent(OpenAI(temperature = 0), 'data_unstr/bathroom_location.csv' , verbose = True )
 m = agent.run(f"{input_main}")
+
+
