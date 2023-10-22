@@ -35,7 +35,6 @@ text_splitter = CharacterTextSplitter(
 )
 texts = text_splitter.split_text(text)
 
-# print(texts)
 embeddings = OpenAIEmbeddings()
 docsearch = FAISS.from_texts(texts, embeddings)
 
@@ -46,9 +45,7 @@ input_main = input('Your question is : ')
 query = f"{input_main}"
 docs = docsearch.similarity_search(query)
 m = chain.run(input_documents=docs, question=query)
-
-if m in text:
-    print(m)
+print(m)
 
 agent = create_csv_agent(OpenAI(temperature = 0), ['data_unstr/TransUPD.csv', 'data_unstr/bathroom_location.csv'] , verbose = True )
 # agent = create_csv_agent(OpenAI(temperature = 0), 'data_unstr/bathroom_location.csv' , verbose = True )
