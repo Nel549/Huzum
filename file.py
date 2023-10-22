@@ -47,21 +47,8 @@ docs = docsearch.similarity_search(query)
 m = chain.run(input_documents=docs, question=query)
 print(m)
 
-import tabula
-# Specify the PDF file path
-pdf_file = "data_unstr/FAQ.pdf"
-
-# Convert the PDF to a DataFrame
-df = tabula.read_pdf(pdf_file, pages='all')
-
-# Save the DataFrame to a CSV file
-df.to_csv("output.csv", index=False)
-
-
-
 agent = create_csv_agent(OpenAI(temperature = 0), ['data_unstr/TransUPD.csv', 'data_unstr/bathroom_location.csv'] , verbose = True )
 # agent = create_csv_agent(OpenAI(temperature = 0), 'data_unstr/bathroom_location.csv' , verbose = True )
-m1 = agent.run(f"{input_main}")   #aici se lucreaza cu inputul
+agent.run("Je veux l'emplacement de Gare (Nord)")
 
-# 
-# Quelle est l’ambiance, le ton de la fête ?
+
